@@ -6,6 +6,9 @@
 
 .carousel-container {
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .carousel-outer-wrapper {
@@ -77,18 +80,20 @@
 }
 
 .carousel-scroll-indicator {
-  width: 300px;
-  margin: 20px auto;
-  text-align: center;
+  height: 20px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .carousel-pip {
   margin: 0 5px;
   color: gray;
-  transition: all .3s linear;
+  transition: font-size .3s linear;
 }
 
 .carousel-pip-active {
   color: #f47d42;
   font-size: 1.5em;
+  line-height: 66%;
 }
