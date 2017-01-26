@@ -27,14 +27,15 @@
   width: 800px;
   height: 700px;
   position: absolute;
+  transition: all .5s linear;
 }
 
 .carousel-slide-left {
-  left: -2000px;
+  left: -850px;
 }
 
 .carousel-slide-right {
-  left: 2000px;
+  left: 850px;
 }
 
 .carousel-slide-active {

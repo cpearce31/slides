@@ -11,4 +11,31 @@ window.onload = function () {
     pip.className = 'carousel-pip fa fa-square';
     indicator.appendChild(pip);
   }
+  let pips = document.querySelectorAll('.carousel-pip');
+  pips[0].classList.toggle('carousel-pip-active');
+
+  let currentSlideIndex = 0;
+
+  function nextSlide () {
+    if (currentSlideIndex < slides.length - 1) {
+      slides[currentSlideIndex].className = 'carousel-slide carousel-slide-left';
+      slides[currentSlideIndex + 1].className = 'carousel-slide carousel-slide-active';
+      pips[currentSlideIndex].classList.toggle('carousel-pip-active');
+      pips[currentSlideIndex + 1].classList.toggle('carousel-pip-active');
+      currentSlideIndex++;
+    }
+  }
+
+  function prevSlide () {
+    if (currentSlideIndex > 0) {
+      slides[currentSlideIndex].className = 'carousel-slide carousel-slide-right';
+      slides[currentSlideIndex - 1].className = 'carousel-slide carousel-slide-active';
+      pips[currentSlideIndex].classList.toggle('carousel-pip-active');
+      pips[currentSlideIndex - 1].classList.toggle('carousel-pip-active');
+      currentSlideIndex--;
+    }
+  }
+
+  left.addEventListener('click', prevSlide);
+  right.addEventListener('click', nextSlide);
 };
