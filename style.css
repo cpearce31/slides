@@ -1,0 +1,45 @@
+/* default ratios (width/height):
+    img: 3/2
+    slide: 8/7
+    slide height/text height: .56
+*/
+
+.carousel-slide {
+  width: 800px;
+  height: 700px;
+  background-color: #efefef;
+  border: 1px solid #c4c3be;
+}
+
+.carousel-slide-img {
+  display: block;
+  width: 750px;
+  height: 500px;
+  margin: 25px auto;
+}
+
+.carousel-slide-text-wrapper {
+  margin: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 125px;
+  font-family: "Helvetica", sans-serif;
+  color: #444;
+}
+
+.carousel-slide-header {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.carousel-btn {
+  border: none;
+  background: inherit;
+  font-size: 4em;
+  outline: none;
+}
+
+.carousel-btn:hover {
+  color: #f47d42;
+}
