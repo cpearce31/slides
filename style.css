@@ -4,11 +4,41 @@
     slide height/text height: .56
 */
 
+.carousel-container {
+  width: 100vw;
+}
+
+.carousel-outer-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.carousel-inner-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: #efefef;
+  border: 1px solid #c4c3be;
+  width: 800px;
+  height: 700px;
+}
+
 .carousel-slide {
   width: 800px;
   height: 700px;
-  background-color: #efefef;
-  border: 1px solid #c4c3be;
+  position: absolute;
+}
+
+.carousel-slide-left {
+  left: -2000px;
+}
+
+.carousel-slide-right {
+  left: 2000px;
+}
+
+.carousel-slide-active {
+  left: 0;
 }
 
 .carousel-slide-img {
@@ -38,8 +68,26 @@
   background: inherit;
   font-size: 4em;
   outline: none;
+  margin: 50px;
 }
 
 .carousel-btn:hover {
   color: #f47d42;
+}
+
+.carousel-scroll-indicator {
+  width: 300px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.carousel-pip {
+  margin: 0 5px;
+  color: gray;
+  transition: all .3s linear;
+}
+
+.carousel-pip-active {
+  color: #f47d42;
+  font-size: 1.5em;
 }
