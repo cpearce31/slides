@@ -14,51 +14,71 @@ window.onload = function () {
     };
     indicator.appendChild(pip);
   }
-  let pips = document.querySelectorAll('.carousel-pip');
 
-  let currentPip = 0;
-  pips[currentPip].toggle();
+  let index = 0;
+  let pips = document.querySelectorAll('.carousel-pip');
+  pips[0].toggle();
+
+  // Wrap-around handling for scroll-idicators (pips!)
   function changePip (direction) {
-    pips[currentPip].toggle();
+    pips[index].toggle();
     if (direction === 'right') {
-      if (currentPip === slides.length - 1) {
-        currentPip = -1;
+      if (index === pips.length - 1) {
+        index = 0;
+      } else {
+        index++;
       }
-      currentPip++;
-      pips[currentPip].toggle();
+    } else if (direction === 'left') {
+      if (index === 0) {
+        index = pips.length - 1;
+      } else {
+        index--;
+      }
+    }
+    pips[index].toggle();
+  }
+
+  // Remove last slide and insert it at the begining of the list,
+  // in case the first move is to the left
+  slides[slides.length - 1].remove();
+  setPosition(slides[slides.length - 1], 'left');
+  wrapper.insertBefore(slides[slides.length - 1], slides[0]);
+  slides = document.querySelectorAll('.carousel-slide');
+
+  function setPosition (slide, pos) {
+    if (pos === 'right') {
+      slide.className = 'carousel-slide carousel-slide-right';
+    } else if (pos === 'left') {
+      slide.className = 'carousel-slide carousel-slide-left';
     } else {
-      if (currentPip === 0) {
-        currentPip = slides.length - 1;
-      }
-      currentPip--;
-      pips[currentPip].toggle();
+      slide.className = 'carousel-slide carousel-slide-active';
     }
   }
 
-  function nextSlide () {
-    slides[0].classList.toggle('carousel-slide-left');
-    slides[0].classList.toggle('carousel-slide-active');
-    slides[1].classList.toggle('carousel-slide-active');
-    changePip('right');
-    let forwardTimeout = setTimeout(function () {
+  function move (direction) {
+    if (direction === 'right') {
+      setPosition(slides[1], 'left');
+      setPosition(slides[2]);
+      slides[0].remove();
+      setPosition(slides[0], 'right');
       wrapper.appendChild(slides[0]);
-      slides[0].classList.toggle('carousel-slide-left');
       slides = document.querySelectorAll('.carousel-slide');
-    }, 600);
+    } else if (direction === 'left') {
+      setPosition(slides[0]);
+      setPosition(slides[1], 'right');
+      slides[slides.length - 1].remove();
+      setPosition(slides[slides.length - 1], 'left');
+      wrapper.insertBefore(slides[slides.length - 1], slides[0]);
+      slides = document.querySelectorAll('.carousel-slide');
+    }
+    changePip(direction);
   }
 
-  function prevSlide () {
-    wrapper.insertBefore(slides[slides.length - 1], slides[0]);
-    slides = document.querySelectorAll('.carousel-slide');
-    slides[0].classList.toggle('carousel-slide-left');
-    window.getComputedStyle(wrapper);
-    slides[0].classList.toggle('carousel-slide-left');
-    slides[0].classList.toggle('carousel-slide-active');
-    slides[1].classList.toggle('carousel-slide-active');
-    changePip('left');
+  right.addEventListener('click', function () {
+    move('right');
+  });
 
-  }
-
-  left.addEventListener('click', prevSlide);
-  right.addEventListener('click', nextSlide);
+  left.addEventListener('click', function () {
+    move('left');
+  });
 };
