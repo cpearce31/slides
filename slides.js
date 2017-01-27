@@ -1,13 +1,23 @@
-window.onload = function () {
-  let slides = document.querySelectorAll('.carousel-slide');
-  let left = document.querySelector('#carousel-btn-left');
-  let right = document.querySelector('#carousel-btn-right');
-  let indicator = document.querySelector('#carousel-scroll-indicator');
-  let wrapper = document.querySelector('#carousel-wrapper');
+var AUTOSCROLL = true; // Change to true to enable autoscrolling
+var PERIOD = 2000;  // Time spent on each slide in milliseconds
 
-  // Add bullets to the scoll indicator section for each slide
-  for (let i = 0; i < slides.length; i++) {
-    let pip = document.createElement('i');
+window.onload = function () {
+
+  // If touch events are detected, disable autoscrolling
+  var touchDevice = false;
+  window.addEventListener('touchstart', function () {
+    touchDevice = true;
+  });
+
+  var slides = document.querySelectorAll('.carousel-slide');
+  var left = document.querySelector('#carousel-btn-left');
+  var right = document.querySelector('#carousel-btn-right');
+  var indicator = document.querySelector('#carousel-scroll-indicator');
+  var wrapper = document.querySelector('#carousel-wrapper');
+
+  // Add bulvars to the scoll indicator section for each slide
+  for (var i = 0; i < slides.length; i++) {
+    var pip = document.createElement('i');
     pip.className = 'carousel-pip fa fa-square';
     pip.toggle = function () {
       this.classList.toggle('carousel-pip-active');
@@ -15,8 +25,8 @@ window.onload = function () {
     indicator.appendChild(pip);
   }
 
-  let index = 0;
-  let pips = document.querySelectorAll('.carousel-pip');
+  var index = 0;
+  var pips = document.querySelectorAll('.carousel-pip');
   pips[0].toggle();
 
   // Wrap-around handling for scroll-idicators (pips!)
@@ -81,4 +91,25 @@ window.onload = function () {
   left.addEventListener('click', function () {
     move('left');
   });
+
+  function startAutoScroll () {
+    if (AUTOSCROLL && !touchDevice) {
+      interval = setInterval(function () {
+        move('right');
+      }, PERIOD);
+    }
+  }
+
+  wrapper.addEventListener('mouseover', function () {
+    if (interval) {
+      clearInterval(interval);
+    }
+  });
+
+  wrapper.addEventListener('mouseout', function () {
+    startAutoScroll();
+  });
+
+  var interval;
+  startAutoScroll();
 };
