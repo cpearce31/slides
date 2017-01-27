@@ -1,9 +1,3 @@
-/* default ratios (width/height):
-    img: 3/2
-    slide: 8/7
-    slide height/text height: .56
-*/
-
 .carousel-container {
   display: flex;
   flex-direction: column;
